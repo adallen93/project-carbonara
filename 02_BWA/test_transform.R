@@ -13,10 +13,13 @@ args <- commandArgs(trailingOnly = TRUE)
 
 # read in file
 fn <- args[1]
+fnum <- gsub("data/input_", "", fn)
+fnum <- gsub("\\.csv", "", fnum)
+
 df <- read.csv(here::here("02_BWA", fn))
 
 # do transformation
 df$c <- with(df, a + b)
 
 # create file
-write.csv(df, here::here("02_BWA/data/output.csv"))
+write.csv(df, here::here(sprintf("02_BWA/data/output_%s.csv", fnum)))
