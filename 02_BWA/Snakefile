@@ -1,0 +1,7 @@
+rule test_transform:
+    input:
+        "data/input.csv"
+    output:
+        "data/output.csv"
+    shell:
+        "\"C:/Program Files/R/R-4.4.1/bin/Rscript.exe\" test_transform.R {input} {output}"
