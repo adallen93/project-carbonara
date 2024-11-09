@@ -1,7 +1,15 @@
-rule test_transform:
+rule transform1:
     input:
         "data/input_{sample}.csv"
     output:
+        "data/mid_{sample}.csv"
+    shell:
+        "\"C:/Program Files/R/R-4.4.1/bin/Rscript.exe\" test_transform_mid.R {input} {output}"
+
+rule transform2:
+    input:
+        "data/mid_{sample}.csv"
+    output:
         "data/output_{sample}.csv"
     shell:
-        "\"C:/Program Files/R/R-4.4.1/bin/Rscript.exe\" test_transform.R {input} {output}"
+        "\"C:/Program Files/R/R-4.4.1/bin/Rscript.exe\" test_transform_end.R {input} {output}"

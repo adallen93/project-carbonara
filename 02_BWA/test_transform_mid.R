@@ -22,4 +22,4 @@ df <- read.csv(here::here("02_BWA", fn))
 df$c <- with(df, a + b)
 
 # create file
-write.csv(df, here::here(sprintf("02_BWA/data/output_%s.csv", fnum)))
+write.csv(df, here::here(sprintf("02_BWA/data/mid_%s.csv", fnum)), row.names=F)
