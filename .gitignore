@@ -1,2 +1,3 @@
 01_BLAST/data/*
 02_BWA/data/*
+*/.snakemake/*
