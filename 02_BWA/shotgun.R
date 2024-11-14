@@ -11,14 +11,18 @@ if (!requireNamespace("BiocManager", quietly = TRUE)) {
   install.packages("BiocManager")
 }
 
-BiocManager::install(version="3.19")
+BiocManager::install(version = "3.18") # 3.19 only works on R 4.4
 BiocManager::install("Biostrings")
 
 library(Biostrings)
 
-# load in reference genome
-fasta_file <- "path/to/your_genome.fasta"
-sequences <- readDNAStringSet(fasta_file)
+# Ask the user for the path to the reference genome
+fasta_file <- readline(
+  prompt = "Please type the full path to your FASTA file containing a reference genome.\n"
+)
+
+# Load the reference genome
+sequences <- Biostrings::readDNAStringSet(fasta_file) # Broken: needs RCurl
 
 # split a genome into random-length segments
 split_random_lengths <- function(seq, min_length, max_length) {
@@ -27,7 +31,7 @@ split_random_lengths <- function(seq, min_length, max_length) {
     len <- sample(seq(min_length, max_length), 1)
     if (len > length(seq)) len <- length(seq)
     lengths <- c(lengths, len)
-    seq <- subseq(seq, start = len + 1)
+    seq <- subseq(seq, start = len + 1) # Broken: needs RCurl
   }
   return(lengths)
 }
