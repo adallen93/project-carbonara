@@ -1,3 +1,5 @@
 01_BLAST/data/*
-02_BWA/data/*
+02_BWA/data/gene/*
+02_BWA/data/genome/*
+02_BWA/data/mapped_reads/*
 */.snakemake/*

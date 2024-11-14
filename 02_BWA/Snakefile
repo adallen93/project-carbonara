@@ -1,15 +1,18 @@
-rule transform1:
+rule index_genomes:
     input:
-        "data/input_{sample}.csv"
+        "data/genome/genome{genome_num}/sequence.fasta"
     output:
-        "data/mid_{sample}.csv"
+        "data/genome/genome{genome_num}/sequence.fasta.amb"
     shell:
-        "\"C:/Program Files/R/R-4.4.1/bin/Rscript.exe\" test_transform_mid.R {input} {output}"
+        """
+        bwa index {input}
+        """
 
-rule transform2:
+rule align_reads:
     input:
-        "data/mid_{sample}.csv"
+        genome="data/genome/genome{genome_num}/sequence.fasta",
+        read="data/gene/{accession}.fastq.gz"
     output:
-        "data/output_{sample}.csv"
+        "data/mapped_reads/align_g{genome_num}_{accession}.bam"
     shell:
-        "\"C:/Program Files/R/R-4.4.1/bin/Rscript.exe\" test_transform_end.R {input} {output}"
+        "bwa mem {input.genome} {input.read} | samtools view -Sb - > data/mapped_reads/{output}"
