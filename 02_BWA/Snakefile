@@ -16,3 +16,11 @@ rule align_reads:
         "data/mapped_reads/align_g{genome_num}_{accession}.bam"
     shell:
         "bwa mem {input.genome} {input.read} | samtools view -Sb - > data/mapped_reads/{output}"
+
+rule sort_reads:
+    input:
+        "data/mapped_reads/align_g{genome_num}_{accession}.bam"
+    output:
+        "data/sorted_reads/sort_g{genome_num}_{accession}.bam"
+    shell:
+        "samtools sort -O bam {input} > {output}"

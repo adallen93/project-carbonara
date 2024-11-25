@@ -7,8 +7,10 @@ This project searches for a exact matches between a target gene within a referen
 ## Environment
 
 Requires
-    - Snakemake v3.13.3
-    - BWA v0.17.8
+    - snakemake v3.13.3
+    - bwa v0.17.8
+    - samtools v1.13
+    - bcftools v1.17
 
 
 ## Datasets
