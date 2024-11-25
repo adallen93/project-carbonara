@@ -24,3 +24,11 @@ rule sort_reads:
         "data/sorted_reads/sort_g{genome_num}_{accession}.bam"
     shell:
         "samtools sort -O bam {input} > {output}"
+
+rule index_reads:
+    input:
+        "data/sorted_reads/sort_g{genome_num}_{accession}.bam"
+    output:
+        "data/sorted_reads/sort_g{genome_num}_{accession}.bam.bai"
+    shell:
+        "samtools index {input}"
