@@ -32,3 +32,15 @@ rule index_reads:
         "data/sorted_reads/sort_g{genome_num}_{accession}.bam.bai"
     shell:
         "samtools index {input}"
+
+
+rule call_variants:
+    input:
+        fasta="data/genome/genome{genome_num}/sequence.fasta",
+        bam="data/sorted_reads/sort_g{genome_num}_{accession}.bam",
+        bai="data/sorted_reads/sort_g{genome_num}_{accession}.bam.bai"
+    output:
+        "data/variant_calls/vars_g{genome_num}_{accession}.vcf"
+    shell:
+        "bcftools mpileup -f {input.fasta} {input.bam} | "
+        "bcftools call -mv - > {output}"
