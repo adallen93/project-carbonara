@@ -1,0 +1,46 @@
+rule index_genomes:
+    input:
+        "data/genome/genome{genome_num}/sequence.fasta"
+    output:
+        "data/genome/genome{genome_num}/sequence.fasta.amb"
+    shell:
+        """
+        bwa index {input}
+        """
+
+rule align_reads:
+    input:
+        genome="data/genome/genome{genome_num}/sequence.fasta",
+        read="data/gene/{accession}.fastq.gz"
+    output:
+        "data/mapped_reads/align_g{genome_num}_{accession}.bam"
+    shell:
+        "bwa mem {input.genome} {input.read} | samtools view -Sb - > data/mapped_reads/{output}"
+
+rule sort_reads:
+    input:
+        "data/mapped_reads/align_g{genome_num}_{accession}.bam"
+    output:
+        "data/sorted_reads/sort_g{genome_num}_{accession}.bam"
+    shell:
+        "samtools sort -O bam {input} > {output}"
+
+rule index_reads:
+    input:
+        "data/sorted_reads/sort_g{genome_num}_{accession}.bam"
+    output:
+        "data/sorted_reads/sort_g{genome_num}_{accession}.bam.bai"
+    shell:
+        "samtools index {input}"
+
+
+rule call_variants:
+    input:
+        fasta="data/genome/genome{genome_num}/sequence.fasta",
+        bam="data/sorted_reads/sort_g{genome_num}_{accession}.bam",
+        bai="data/sorted_reads/sort_g{genome_num}_{accession}.bam.bai"
+    output:
+        "data/variant_calls/vars_g{genome_num}_{accession}.vcf"
+    shell:
+        "bcftools mpileup -f {input.fasta} {input.bam} | "
+        "bcftools call -mv - > {output}"
