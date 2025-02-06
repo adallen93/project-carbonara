@@ -4,4 +4,5 @@
 02_BWA/data/mapped_reads/*
 02_BWA/data/sorted_reads/*
 02_BWA/data/variant_calls/*
+02_BWA/data/stats/*
 */.snakemake/*
