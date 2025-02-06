@@ -15,7 +15,7 @@ rule align_reads:
     output:
         "data/mapped_reads/align_g{genome_num}_{accession}.bam"
     shell:
-        "bwa mem {input.genome} {input.read} | samtools view -Sb - > data/mapped_reads/{output}"
+        "bwa mem {input.genome} {input.read} | samtools view -Sb - > {output}"
 
 rule sort_reads:
     input:
@@ -44,3 +44,22 @@ rule call_variants:
     shell:
         "bcftools mpileup -f {input.fasta} {input.bam} | "
         "bcftools call -mv - > {output}"
+
+
+rule gen_stats:
+    input:
+        "data/variant_calls/vars_g{genome_num}_{accession}.vcf"
+    output:
+        "data/stats/stats_g{genome_num}_{accession}.vchk"
+    shell:
+        "bcftools stats {input} -s - > {output}"
+
+
+rule gen_plots:
+    input: 
+        file="data/stats/stats_g{genome_num}_{accession}.vchk",
+        outdir="data/plots/g{genome_num}_{accession}"
+    output:
+        "data/plots/g{genome_num}_{accession}/summary.pdf"
+    shell:
+        "plot-vcfstats -p {input.outdir} {input.file}"

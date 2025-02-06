@@ -7,10 +7,13 @@ This project searches for a exact matches between a target gene within a referen
 ## Environment
 
 Requires
+    - Python v3.6
     - snakemake v3.13.3
-    - bwa v0.17.8
-    - samtools v1.13
-    - bcftools v1.17
+    - bwa v0.7.17
+    - samtools v1.10
+    - bcftools v1.10
+    - matplotlib v3.3.4
+    - pdflatex v0.1.3
 
 
 ## Datasets
