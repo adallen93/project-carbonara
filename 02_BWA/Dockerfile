@@ -1,4 +1,4 @@
-# Use an official Python image as the base image [test test test]
+# Use an official Python image as the base image
 FROM ubuntu:20.04
 
 ENV DEBIAN_FRONTEND=noninteractive
@@ -57,7 +57,7 @@ RUN wget https://archive.ubuntu.com/ubuntu/pool/universe/b/bcftools/bcftools_1.1
     rm bcftools_1.10.2-2_amd64.deb
 
 # Install Snakemake
-RUN pip install snakemake==3.13.3
+RUN pip install snakemake==9.5.1
 
 # Set the working directory
 WORKDIR /data
