@@ -32,9 +32,9 @@ RUN apt-get update
 RUN apt-get install -y python3.7
 RUN apt-get install -y python3.7-distutils
 
-# RUN virtualenv -p /usr/bin/python3.6 venv
+# RUN virtualenv -p /usr/bin/python3.7 venv
 
-RUN update-alternatives --install /bin/python3 python3 /bin/python3.6 1  && \
+RUN update-alternatives --install /bin/python3 python3 /bin/python3.7 1  && \
     update-alternatives --config python3
 
 
