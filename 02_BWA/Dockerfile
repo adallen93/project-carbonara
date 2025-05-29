@@ -26,11 +26,11 @@ RUN apt-get update && \
 RUN apt-get install -y software-properties-common
 
 
-# Install Python 3.6 (required for Snakemake)
+# Install Python 3.7 (required for Snakemake)
 RUN add-apt-repository ppa:deadsnakes/ppa
 RUN apt-get update
-RUN apt-get install -y python3.6
-RUN apt-get install -y python3.6-distutils
+RUN apt-get install -y python3.7
+RUN apt-get install -y python3.7-distutils
 
 # RUN virtualenv -p /usr/bin/python3.6 venv
 
