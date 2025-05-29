@@ -14,6 +14,8 @@ Requires
     - bcftools v1.10
     - matplotlib v3.3.4
     - pdflatex v0.1.3
+    - pulp v2.6.0
+    - tabulate v0.8
 
 
 ## Datasets

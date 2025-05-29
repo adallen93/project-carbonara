@@ -41,6 +41,10 @@ RUN update-alternatives --install /bin/python3 python3 /bin/python3.8 1  && \
 # Install pip
 RUN apt-get install -y pip
 
+# Realign Python libraries
+RUN pip install pulp==2.6.0
+RUN pip install tabulate==0.8
+
 # Install BWA
 RUN wget http://archive.ubuntu.com/ubuntu/pool/universe/b/bwa/bwa_0.7.17-1_amd64.deb && \
     dpkg -i bwa_0.7.17-1_amd64.deb && \
