@@ -57,7 +57,7 @@ RUN wget https://archive.ubuntu.com/ubuntu/pool/universe/b/bcftools/bcftools_1.1
     rm bcftools_1.10.2-2_amd64.deb
 
 # Install Snakemake
-RUN pip install snakemake==9.5.1
+RUN pip install snakemake==7.8.3
 
 # Set the working directory
 WORKDIR /data
