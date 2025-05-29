@@ -26,15 +26,15 @@ RUN apt-get update && \
 RUN apt-get install -y software-properties-common
 
 
-# Install Python 3.7 (required for Snakemake)
+# Install Python 3.8 (required for Snakemake)
 RUN add-apt-repository ppa:deadsnakes/ppa
 RUN apt-get update
-RUN apt-get install -y python3.7
-RUN apt-get install -y python3.7-distutils
+RUN apt-get install -y python3.8
+RUN apt-get install -y python3.8-distutils
 
-# RUN virtualenv -p /usr/bin/python3.7 venv
+# RUN virtualenv -p /usr/bin/python3.8 venv
 
-RUN update-alternatives --install /bin/python3 python3 /bin/python3.7 1  && \
+RUN update-alternatives --install /bin/python3 python3 /bin/python3.8 1  && \
     update-alternatives --config python3
 
 
